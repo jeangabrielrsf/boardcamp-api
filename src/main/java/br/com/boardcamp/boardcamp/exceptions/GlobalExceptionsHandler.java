@@ -21,4 +21,14 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<String> handleCustomerAlreadyExists(CustomerAlreadyExistsException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
+
+    @ExceptionHandler({GameNotFoundException.class})
+    public ResponseEntity<String> handleGameNotFound(GameNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+    @ExceptionHandler({GameStockInsuficientException.class})
+    public ResponseEntity<String> handleGameStockInsuficient(GameStockInsuficientException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception.getMessage());
+    }
 }

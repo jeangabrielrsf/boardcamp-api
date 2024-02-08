@@ -2,6 +2,7 @@ package br.com.boardcamp.boardcamp.models;
 
 import java.time.LocalDate;
 
+import br.com.boardcamp.boardcamp.dtos.RentalDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,4 +48,7 @@ public class RentalModel {
 
 
 
+    public RentalModel(RentalDTO rentalDTO) {
+        this.daysRented = rentalDTO.getDaysRented();
+    }
 }
