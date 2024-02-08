@@ -16,4 +16,9 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<String> handleCustomerNotFound(CustomerNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
+
+    @ExceptionHandler({CustomerAlreadyExistsException.class})
+    public ResponseEntity<String> handleCustomerAlreadyExists(CustomerAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
 }
