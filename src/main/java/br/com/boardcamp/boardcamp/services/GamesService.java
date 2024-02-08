@@ -8,6 +8,7 @@ import br.com.boardcamp.boardcamp.dtos.GamesDTO;
 import br.com.boardcamp.boardcamp.models.GamesModel;
 import br.com.boardcamp.boardcamp.repositories.GamesRepository;
 import lombok.AllArgsConstructor;
+import br.com.boardcamp.boardcamp.exceptions.GameAlreadyExistsException;
 
 @AllArgsConstructor
 @Service
@@ -19,9 +20,7 @@ public class GamesService {
     }
 
     public GamesModel create(GamesDTO gamesDTO) {
-        if (gamesRepository.existsByName(gamesDTO.getName())) {
-            
-        }
+        if (gamesRepository.existsByName(gamesDTO.getName())) throw new GameAlreadyExistsException("Já existe um jogo com esse nome!");
         GamesModel game = new GamesModel(gamesDTO);
         return gamesRepository.save(game);
     }
