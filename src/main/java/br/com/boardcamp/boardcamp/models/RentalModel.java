@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,17 +39,23 @@ public class RentalModel {
 
     private Integer delayFee;
 
-    @OneToOne
-    @JoinColumn(name = "game_id")
+    @ManyToOne
+    @JoinColumn(name = "games")
     private GamesModel game;
 
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+    @ManyToOne
+    @JoinColumn(name = "customers")
     private CustomerModel customer;
 
 
 
-    public RentalModel(RentalDTO rentalDTO) {
+    public RentalModel(RentalDTO rentalDTO, CustomerModel customer, GamesModel game) {
         this.daysRented = rentalDTO.getDaysRented();
+        this.game = game;
+        this.customer = customer;
+        this.rentDate = LocalDate.now();
+        this.originalPrice = daysRented * game.getPricePerDay();
+        this.returnDate = null;
+        this.delayFee = 0;
     }
 }

@@ -31,4 +31,10 @@ public class GamesService {
         return gamesRepository.findById(gameId)
             .orElseThrow(()-> new GameNotFoundException("Jogo não encontrado!"));
     }
+
+    public void decreaseGameStock(Long gameId) {
+        GamesModel game = findGameById(gameId);
+        game.setStockTotal(game.getStockTotal() - 1);
+        gamesRepository.save(game);
+    }
 }

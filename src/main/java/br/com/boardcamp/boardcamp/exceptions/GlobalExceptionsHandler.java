@@ -31,4 +31,9 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<String> handleGameStockInsuficient(GameStockInsuficientException exception) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception.getMessage());
     }
+
+    @ExceptionHandler({RentalNotFinishedException.class})
+    public ResponseEntity<String> handleRentalNotFinished(RentalNotFinishedException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
 }
