@@ -36,4 +36,14 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<String> handleRentalNotFinished(RentalNotFinishedException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
+
+    @ExceptionHandler({RentalNotFoundException.class})
+    public ResponseEntity<String> handleRentalNotFound(RentalNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+    @ExceptionHandler({RentalAlreadyFinished.class})
+    public ResponseEntity<String> handleRentalAlreadyFinished(RentalAlreadyFinished exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception.getMessage());
+    }
 }
